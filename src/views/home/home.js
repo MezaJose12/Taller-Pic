@@ -1,5 +1,4 @@
 import { LitElement, css, html } from "lit";
-import { loadProducts, saveProducts } from "../../componentes/productos-storage.js";
 import "../../componentes/tarjeta-producto.js";
 import "./register.js";
 import "./tabla.js";
@@ -54,13 +53,11 @@ class Home extends LitElement {
 
   constructor() {
     super();
-    this.lista = loadProducts();
+    this.lista = [];
   }
 
   addProduct(event) {
-    const products = [...this.lista, event.detail];
-    saveProducts(products);
-    this.lista = products;
+    this.lista = [...this.lista, event.detail];
   }
 
   render() {
