@@ -6,7 +6,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: resolve(process.cwd(), "index.html"),
-        tabla: resolve(process.cwd(), "tabla.html"),
       },
     },
   },

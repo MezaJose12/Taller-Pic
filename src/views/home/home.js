@@ -2,6 +2,7 @@ import { LitElement, css, html } from "lit";
 import { loadProducts, saveProducts } from "../../componentes/productos-storage.js";
 import "../../componentes/tarjeta-producto.js";
 import "./register.js";
+import "./tabla.js";
 
 class Home extends LitElement {
   static properties = {
@@ -30,6 +31,10 @@ class Home extends LitElement {
       gap: 1rem;
       align-items: stretch;
       margin: 1.5rem 0 2rem;
+    }
+
+    .tabla-section {
+      margin-top: 2rem;
     }
 
     tarjeta-producto {
@@ -77,8 +82,12 @@ class Home extends LitElement {
               )
             : html`<p class="vacio">Aún no hay productos. Registra uno para mostrarlo aquí.</p>`}
         </section>
+
         <wc-form-register @product-register=${this.addProduct}></wc-form-register>
-        <a href="/tabla.html">Ver tabla de productos</a>
+
+        <section class="tabla-section">
+          <wc-table .lista=${this.lista}></wc-table>
+        </section>
       </main>
     `;
   }

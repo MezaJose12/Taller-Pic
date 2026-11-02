@@ -1,5 +1,18 @@
 import { LitElement, css, html } from "lit";
+import { loadProducts } from "../../componentes/productos-storage.js";
 import "../../componentes/tarjeta-producto.js";
+
+class ProductsPage extends LitElement {
+  render() {
+    return html`
+      <main>
+        <h1>Tabla de productos</h1>
+        <p><a href="/">Volver al registro</a></p>
+        <wc-table></wc-table>
+      </main>
+    `;
+  }
+}
 
 class Table extends LitElement {
   static properties = {
@@ -33,7 +46,7 @@ class Table extends LitElement {
 
   constructor() {
     super();
-    this.lista = [];
+    this.lista = loadProducts();
   }
 
   render() {
@@ -71,4 +84,5 @@ class Table extends LitElement {
   }
 }
 
+customElements.define("wc-products-page", ProductsPage);
 customElements.define("wc-table", Table);
