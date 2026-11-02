@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
 import "../../externos/equipo_externo/register.js";
+import "../home/tabla.js";
 
 class Integracion extends LitElement {
   static properties = {
@@ -37,37 +38,9 @@ class Integracion extends LitElement {
   render() {
     return html`
       <section>
-        <h2>Catálogo de café</h2>
+        <h2>Integración de equipos</h2>
         <wc-register @cafeRegister=${this.agregarCafe}></wc-register>
-
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Café</th>
-              <th scope="col">Origen</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${this.lista.length
-              ? this.lista.map(
-                  (cafe, index) => html`
-                    <tr>
-                      <td>${index + 1}</td>
-                      <td>${cafe.nombre}</td>
-                      <td>${cafe.origen}</td>
-                      <td>$${cafe.precio.toFixed(2)}</td>
-                      <td>${cafe.cantidad}</td>
-                      <td>$${cafe.total.toFixed(2)}</td>
-                    </tr>
-                  `,
-                )
-              : html`<tr><td colspan="6">Aún no hay cafés registrados.</td></tr>`}
-          </tbody>
-        </table>
+        <wc-table .lista=${this.lista} .titulo=${"Cafés registrados"}></wc-table>
       </section>
     `;
   }

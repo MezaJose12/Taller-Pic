@@ -4,6 +4,7 @@ import "../../componentes/tarjeta-producto.js";
 class Table extends LitElement {
   static properties = {
     lista: { type: Array },
+    titulo: { type: String },
   };
 
   static styles = css`
@@ -34,11 +35,12 @@ class Table extends LitElement {
   constructor() {
     super();
     this.lista = [];
+    this.titulo = "Productos registrados";
   }
 
   render() {
     return html`
-      <h2>Productos registrados</h2>
+      <h2>${this.titulo}</h2>
       <table>
         <thead>
           <tr>
@@ -53,13 +55,24 @@ class Table extends LitElement {
                   <tr>
                     <td>${index + 1}</td>
                     <td>
-                      <tarjeta-producto .precio=${producto.precio}>
-                        ${producto.foto
-                          ? html`<img slot="foto" src=${producto.foto} alt=${producto.titulo} />`
-                          : ""}
-                        <span slot="nombre">${producto.titulo}</span>
-                        ${producto.descripcion}
-                      </tarjeta-producto>
+                      ${producto.nombre !== undefined
+                        ? html`
+                            <tarjeta-producto .precio=${producto.precio}>
+                              <span slot="nombre">${producto.nombre}</span>
+                              Origen: ${producto.origen}<br />
+                              Cantidad: ${producto.cantidad}<br />
+                              Total: $${Number(producto.total).toFixed(2)}
+                            </tarjeta-producto>
+                          `
+                        : html`
+                            <tarjeta-producto .precio=${producto.precio}>
+                              ${producto.foto
+                                ? html`<img slot="foto" src=${producto.foto} alt=${producto.titulo} />`
+                                : ""}
+                              <span slot="nombre">${producto.titulo}</span>
+                              ${producto.descripcion}
+                            </tarjeta-producto>
+                          `}
                     </td>
                   </tr>
                 `,
